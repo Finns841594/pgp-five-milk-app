@@ -1,15 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { MainHeader } from './components/MainHeader';
+import { MilkCards } from './components/MilkCards';
 
 function App() {
   return (
-    <div>
-      <header>
-        <h1 className="text-lg text-violet-700">
-          Hello world!
-        </h1 >
-      </header>
+    <div className="">
+      <MainHeader />
+      <MilkCards />
       
     </div>
   );

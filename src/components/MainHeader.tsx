@@ -1,10 +1,22 @@
-import { Button, Link, Navbar, Text } from "@nextui-org/react";
+import { Button, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
 import userIcon from '../userIcon.svg'
+import { useEffect, useState, Key } from "react";
+import { fetchMilkTypes } from "./utilities";
 
 export const MainHeader = () => {
+  const [milkTypes, setMilkTypes] = useState<string[]>([])
+  const [selectedMilkType, setSelectedMilkType] = useState<string>("")
+
+  useEffect(() => {
+    fetchMilkTypes().then((milkTypes) => setMilkTypes(milkTypes))
+  }, [])
+
+  const selectHandler = (key:Key) => {
+  }
+
   return (
     <div>
-      <Navbar isBordered >
+      <Navbar isBordered variant='sticky'>
         <Navbar.Brand>
           <Text h1 size={38}
             css={{
@@ -15,12 +27,26 @@ export const MainHeader = () => {
             Fresh Milk Shop
           </Text>
         </Navbar.Brand>
+
         <Navbar.Content hideIn="xs">
-          <Navbar.Link href="#">Features</Navbar.Link>
-          <Navbar.Link isActive href="#">Customers</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Company</Navbar.Link>
+
+          <Navbar.Link href="#">All Products</Navbar.Link>
+
+          <Dropdown isBordered>
+            <Navbar.Item>
+              <Dropdown.Button auto light css={{ px:0, dflex:"center", svg:{ pe:"none"}}}>By Types</Dropdown.Button>
+            </Navbar.Item>
+            <Dropdown.Menu css={{ tt: "capitalize" }} selectionMode="single" selectedKeys={selectedMilkType} onAction={ (key:Key) => selectHandler(key)}>
+              {milkTypes.map((milkType, index) => (
+                <Dropdown.Item key={index}>{milkType}</Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Navbar.Link href="#">Search</Navbar.Link>
+
         </Navbar.Content>
+
         <Navbar.Content>
           <Navbar.Link color="inherit" href="#">
             Login

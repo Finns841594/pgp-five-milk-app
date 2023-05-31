@@ -2,16 +2,20 @@ import { Button, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
 import userIcon from '../userIcon.svg'
 import { useEffect, useState, Key } from "react";
 import { fetchMilkTypes } from "./utilities";
+import { useAppDispatch, useAppSelector } from "../hooks";
 
 export const MainHeader = () => {
   const [milkTypes, setMilkTypes] = useState<string[]>([])
   const [selectedMilkType, setSelectedMilkType] = useState<string>("")
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     fetchMilkTypes().then((milkTypes) => setMilkTypes(milkTypes))
   }, [])
 
   const selectHandler = (key:Key) => {
+    setSelectedMilkType(key as string)
   }
 
   return (

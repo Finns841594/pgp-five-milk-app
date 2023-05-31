@@ -4,16 +4,22 @@ import { fetchMilk } from "./utilities"
 import { Milk } from "../types"
 import { useState, useEffect } from "react"
 
+import { selectMilks, setMilks } from "../milkSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+
 export const MilkCards = () => {
-  const [milkList, setMilkList] = useState<Milk[]>([])
   const [milkCount, setMilkCount] = useState<number>(0)
   const [pages, setPages] = useState<number>(1)
 
+  const milksFromRedux = useAppSelector(selectMilks)
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    fetchMilk().then((milkList) => {
-      setMilkList(milkList.results)
-      setMilkCount(milkList.count)
-      setPages(milkList.count / 9)})
+    fetchMilk().then((milks) => {
+      dispatch(setMilks(milks))
+      setMilks(milks.results)
+      setMilkCount(milks.count)
+      setPages(milks.count / 9)})
   }, [])
 
   // const milkList = [1,2,3,4,5,6,7,8,9]
@@ -21,8 +27,9 @@ export const MilkCards = () => {
   return (
     <div className="px-10">
       <h3>{milkCount} products</h3>
+      {milksFromRedux.count > 0 && <h4>Test: {milksFromRedux.results[0].id}</h4>}
       <Grid.Container gap={2} justify="space-evenly">
-        {milkList.map((milk, index) => (
+        {milksFromRedux.results.map((milk, index) => (
           <Grid xs={12} md={6} lg={4} key={index}>
             <Card css={{ mw:"300px" }}>
               <Card.Image 

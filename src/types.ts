@@ -4,3 +4,9 @@ export type Milk =  {
   storage: number;
   id: string;
 }
+
+export type MilkResponse = {
+  count: number;
+  page: number;
+  results: Milk[];
+}

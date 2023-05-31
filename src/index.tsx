@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import {store} from './store';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -10,9 +12,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <NextUIProvider>
-      <App />
-    </NextUIProvider>
+    <Provider store={store}>
+      <NextUIProvider>
+        <App />
+      </NextUIProvider>
+    </Provider>
   </React.StrictMode>
 );
 

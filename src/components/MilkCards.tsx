@@ -27,21 +27,23 @@ export const MilkCards = () => {
       <Grid.Container gap={3} justify="flex-start">
         {milksFromRedux.results.map((milk, index) => (
           <Grid lg={3} key={index}>
-            <Card css={{ mw:"300px" }}>
-              <Card.Image 
-                src={milkPNG}
-              />
-              <Card.Divider />
-              <Card.Body>
-                <h4>{milk.name}</h4>
-              </Card.Body>
-              <Card.Footer>
-                <Row justify="space-between">
-                  <p>{milk.type}</p>
-                  <p>Storage: {milk.storage}</p>
-                </Row>
-              </Card.Footer>
-            </Card>
+            <a href={`/product/${milk.id}`}>
+              <Card css={{ mw:"300px" }} isPressable >
+                <Card.Image 
+                  src={milkPNG}
+                />
+                <Card.Divider />
+                <Card.Body>
+                  <h4>{milk.name}</h4>
+                </Card.Body>
+                <Card.Footer>
+                  <Row justify="space-between">
+                    <p>{milk.type}</p>
+                    <p>Storage: {milk.storage}</p>
+                  </Row>
+                </Card.Footer>
+              </Card>
+            </a>
           </Grid>
           ))}
       </Grid.Container>

@@ -31,14 +31,16 @@ export const MainHeader = () => {
     <div>
       <Navbar isBordered variant='sticky'>
         <Navbar.Brand>
-          <Text h1 size={38}
-            css={{
-              textGradient: "45deg, $purple600 -10%, $pink600 150%",
-            }}
-            weight="bold"
-          >
-            Fresh Milk Shop
-          </Text>
+          <a href="/">
+            <Text h1 size={38}
+              css={{
+                textGradient: "45deg, $purple600 -10%, $pink600 150%",
+              }}
+              weight="bold"
+            >
+              Fresh Milk Shop
+            </Text>
+          </a>
         </Navbar.Brand>
 
         <Navbar.Content hideIn="xs">

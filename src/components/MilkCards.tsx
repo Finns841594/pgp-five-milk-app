@@ -1,9 +1,8 @@
 import { Card, Grid, Row, Pagination } from "@nextui-org/react"
 import milkPNG from "../milk.png"
-import { fetchMilk } from "./utilities"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 
-import { initialMilks, selectMilks, setMilks, updateMilksByPage } from "../milkSlice";
+import { initialMilks, selectMilks, updateMilksByPage } from "../milkSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 
 export const MilkCards = () => {
@@ -15,22 +14,22 @@ export const MilkCards = () => {
     dispatch(initialMilks())
   }, [])
 
-  // const milkList = [1,2,3,4,5,6,7,8,9]
   const pageHandler = (page:number) => {
     dispatch(updateMilksByPage(page))
   }
 
   return (
-    <div className="px-10 mx-10">
-      <h3>We have {milksFromRedux.count} products</h3>
+    <div className="lg:w-10/12 w-full mx-auto flex flex-col justify-center">
+      <h3 className="ml-6 mt-12">We have {milksFromRedux.count} products</h3>
       {/* {milksFromRedux.count > 0 && <h4>Test: {milksFromRedux.results[0].id}</h4>} */}
-      <Grid.Container gap={3} justify="flex-start">
+      <Grid.Container gap={3} justify="space-around">
         {milksFromRedux.results.map((milk, index) => (
-          <Grid lg={3} key={index}>
+          <Grid lg={4} key={index}>
             <a href={`/product/${milk.id}`}>
               <Card css={{ mw:"300px" }} isPressable >
                 <Card.Image 
                   src={milkPNG}
+                  css={{ padding: "10px" }}
                 />
                 <Card.Divider />
                 <Card.Body>
@@ -47,7 +46,7 @@ export const MilkCards = () => {
           </Grid>
           ))}
       </Grid.Container>
-      <div>
+      <div className="w-full my-16 flex flex-row justify-center">
         <Pagination total={Math.ceil(milksFromRedux.count / 9)} initialPage={1} color='secondary' shadow onChange={(page:number) => pageHandler(page)} />
       </div>
     </div>

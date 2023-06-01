@@ -2,8 +2,8 @@ import { Button, Dropdown, Input, Link, Navbar, Text } from "@nextui-org/react";
 import { useEffect, useState, Key } from "react";
 import { fetchMilkTypes } from "./utilities";
 
-import { updateMilksBySearch, updateMilksByType, updateMilksByTypeAndPage } from "../milkSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { updateMilksBySearch, updateMilksByTypeAndPage } from "../milkSlice";
+import { useAppDispatch } from "../hooks";
 
 export const MainHeader = () => {
   const [milkTypes, setMilkTypes] = useState<string[]>([])
@@ -62,7 +62,7 @@ export const MainHeader = () => {
             <Input clearable contentRight={
               <Button auto flat color="secondary" onClick={e => searchHandler(e)}>Search</Button>
             } 
-            placeholder="find milk by name ..." onChange={(e) => setSearchValue(e.currentTarget.value)}/>
+            placeholder="find milks by name ..." onChange={(e) => setSearchValue(e.currentTarget.value)}/>
           </Navbar.Item>
           {/* <p>{searchValue}</p> */}
 

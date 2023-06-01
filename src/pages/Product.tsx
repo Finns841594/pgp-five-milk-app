@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom"
-import { MainHeader } from "../components/MainHeader"
+import { SimpleHeader } from "../components/SimpleHeader"
 import { useAppSelector } from "../hooks"
 import { selectMilks } from "../milkSlice"
 import { useEffect, useState } from "react"
@@ -29,13 +29,9 @@ export const Product = () => {
 
   return (
     <>
-      <MainHeader />
-      <p>Product Info: {id}</p>
-      <p>{currentMilk?.name}</p>
-      <p>{currentMilk?.type}</p>
-      <p>{currentMilk?.storage}</p>
+      <SimpleHeader />
 
-      <div className="w-3/4">
+      <div className="lg:w-1/2 mt-20 mx-auto">
         <Card css={{ w: "100%", h: "400px" }}>
           <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
             <Col>
@@ -63,21 +59,16 @@ export const Product = () => {
               bgBlur: "#0f111466",
               borderTop: "$borderWeights$light solid $gray800",
               bottom: 0,
-              zIndex: 1,
             }}
           >
-            <Row>
+            <Row align="center">
               <Col>
-                <Row>
-                  <Col>
-                    <Text color="#d1d1d1" size={12}>
-                      Storage:
-                    </Text>
-                    <Text color="white" size={16}>
-                      {currentMilk?.storage}
-                    </Text>
-                  </Col>
-                </Row>
+                <Text color="#d1d1d1" size={12}>
+                  Storage:
+                </Text>
+                <Text color="white" size={16}>
+                  {currentMilk?.storage}
+                </Text>
               </Col>
               <Col>
                 <Slider

@@ -1,13 +1,15 @@
 import './App.css';
-import { MainHeader } from './components/MainHeader';
-import { MilkCards } from './components/MilkCards';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from './pages/Home';
 
 function App() {
   return (
-    <div className="">
-      <MainHeader />
-      <MilkCards />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,21 +1,30 @@
-import { Button, Dropdown, Link, Navbar, Text } from "@nextui-org/react";
-import userIcon from '../userIcon.svg'
+import { Button, Dropdown, Input, Link, Navbar, Text } from "@nextui-org/react";
 import { useEffect, useState, Key } from "react";
 import { fetchMilkTypes } from "./utilities";
+
+import { updateMilksBySearch, updateMilksByType, updateMilksByTypeAndPage } from "../milkSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 
 export const MainHeader = () => {
   const [milkTypes, setMilkTypes] = useState<string[]>([])
-  const [selectedMilkType, setSelectedMilkType] = useState<string>("")
+  // const [selectedMilkType, setSelectedMilkType] = useState<string>("All")
+  const [searchValue, setSearchValue] = useState<string>("")
 
   const dispatch = useAppDispatch()
 
+  // Should I move this to redux store?
   useEffect(() => {
-    fetchMilkTypes().then((milkTypes) => setMilkTypes(milkTypes))
+    fetchMilkTypes().then((milkTypes) => setMilkTypes(['All'].concat(milkTypes)))
   }, [])
 
   const selectHandler = (key:Key) => {
-    setSelectedMilkType(key as string)
+    // setSelectedMilkType(key as string)
+    dispatch(updateMilksByTypeAndPage({milkType: key as string, page:1}))
+  }
+
+  // ❗️Need to fix this any type when I have time
+  const searchHandler = (e:any) => {
+    dispatch(updateMilksBySearch(searchValue))
   }
 
   return (
@@ -34,20 +43,26 @@ export const MainHeader = () => {
 
         <Navbar.Content hideIn="xs">
 
-          <Navbar.Link href="#">All Products</Navbar.Link>
-
           <Dropdown isBordered>
             <Navbar.Item>
               <Dropdown.Button auto light css={{ px:0, dflex:"center", svg:{ pe:"none"}}}>By Types</Dropdown.Button>
             </Navbar.Item>
-            <Dropdown.Menu css={{ tt: "capitalize" }} selectionMode="single" selectedKeys={selectedMilkType} onAction={ (key:Key) => selectHandler(key)}>
+            <Dropdown.Menu css={{ tt: "capitalize" }} selectionMode="single" onAction={ (key:Key) => selectHandler(key)}>
               {milkTypes.map((milkType, index) => (
-                <Dropdown.Item key={index}>{milkType}</Dropdown.Item>
+                <Dropdown.Item key={milkType}>{milkType}</Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
 
-          <Navbar.Link href="#">Search</Navbar.Link>
+          {/* <Navbar.Link href="#">{selectedMilkType}</Navbar.Link> */}
+
+          <Navbar.Item>
+            <Input clearable contentRight={
+              <Button auto flat color="secondary" onClick={e => searchHandler(e)}>Search</Button>
+            } 
+            placeholder="find milk by name ..." onChange={(e) => setSearchValue(e.currentTarget.value)}/>
+          </Navbar.Item>
+          {/* <p>{searchValue}</p> */}
 
         </Navbar.Content>
 
@@ -56,7 +71,7 @@ export const MainHeader = () => {
             Login
           </Navbar.Link>
           <Navbar.Item>
-            <Button auto flat as={Link} href="#">
+            <Button auto flat as={Link} href="#" color="secondary">
               Sign Up
             </Button>
           </Navbar.Item>

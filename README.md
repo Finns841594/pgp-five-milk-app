@@ -26,7 +26,7 @@ I know its unnecessary to use Redux in this project, I use it for picking up the
 
 - [NextUI](https://next.material-ui.com/)
 - [MUI](https://mui.com/)
-- [A thank photo from unsplash](https://unsplash.com/)
+- [A thank photo from unsplash](https://unsplash.com/photos/ru4jyDiLHsI)
 
 ### Features
 

@@ -1,4 +1,4 @@
-import { Card, Grid, Row, Pagination } from "@nextui-org/react"
+import { Card, Grid, Row, Pagination, Text } from "@nextui-org/react"
 import milkPNG from "../milk.png"
 import { useEffect } from "react"
 
@@ -33,12 +33,12 @@ export const MilkCards = () => {
                 />
                 <Card.Divider />
                 <Card.Body>
-                  <h4>{milk.name}</h4>
+                  <Text css={{ textGradient: "45deg, $purple600 -10%, $pink600 150%",}} h4>{milk.name}</Text>
                 </Card.Body>
                 <Card.Footer>
                   <Row justify="space-between">
-                    <p>{milk.type}</p>
-                    <p>Storage: {milk.storage}</p>
+                    <Text css={{ tt: "capitalize" }}>{milk.type}</Text>
+                    <Text>Storage: {milk.storage}</Text>
                   </Row>
                 </Card.Footer>
               </Card>

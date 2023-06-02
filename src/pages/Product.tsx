@@ -32,13 +32,16 @@ export const Product = () => {
       <SimpleHeader />
 
       <div className="lg:w-1/2 mt-20 mx-auto">
+        <a href="/">
+          <Button className="lg:w-1/2 my-10" color="secondary" bordered ghost>  Back </Button>
+        </a>
         <Card css={{ w: "100%", h: "400px" }}>
           <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
             <Col>
               <Text size={12} weight="bold" transform="uppercase" color="ffffffAA">
                 {currentMilk?.type}
               </Text>
-              <Text h3 color="secondary">
+              <Text h3 css={{ textGradient: "45deg, $purple600 -10%, $pink600 150%",}}>
                 {currentMilk?.name}
               </Text>
             </Col>

@@ -1,7 +1,7 @@
-import { Milk, MilkResponse } from "./types";
+import { MilkResponse } from "./types";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { fetchMilk, fetchMilkByPage, fetchMilkBySearch, fetchMilkByType, fetchMilkByTypeAndPage } from "./components/utilities";
+import { fetchMilk, fetchMilkByPage, fetchMilkBySearch, fetchMilkByTypeAndPage } from "./components/utilities";
 
 export interface MilkState {
   contents: MilkResponse;
@@ -29,19 +29,10 @@ export const updateMilksByPage = createAsyncThunk(
   }
 )
 
-export const updateMilksByType = createAsyncThunk(
-  'milks/updateMilks',
-  async (milkType: string) => {
-    const response = await fetchMilkByType(milkType);
-    return response;
-  }
-)
-
 export const updateMilksBySearch = createAsyncThunk(
   'milks/updateMilks',
   async (milkType: string) => {
     const response = await fetchMilkBySearch(milkType);
-    console.log('😎response', response)
     return response;
   }
 )
@@ -59,20 +50,6 @@ const initialData: MilkResponse = {
   page:1,
   results: []
 }
-
-export const currentMilkTypeSlice = createSlice({
-  name: "milkType",
-  initialState: {
-    contents: 'all',
-    status: 'idle',
-  } as MilkTypeState,
-  reducers: {
-    setMilkType: (state, action:PayloadAction<string>) => {
-      state.contents = action.payload;
-    }
-  },
-  }
-)
 
 export const milkSlice = createSlice({
   name: "milk",

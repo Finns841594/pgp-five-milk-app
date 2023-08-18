@@ -49,6 +49,7 @@ export const MilkCards = () => {
       <div className="w-full my-16 flex flex-row justify-center">
         <Pagination total={Math.ceil(milksFromRedux.count / 9)} initialPage={1} color='secondary' shadow onChange={(page:number) => pageHandler(page)} />
       </div>
+      <p>Footer to be implemented here</p>
     </div>
   )
 }
